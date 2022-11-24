@@ -1,0 +1,86 @@
+﻿@model SysmcCRM.Models.ViewModel.UpdateCustomerViewModel
+@{
+}
+<h1>Customer Details</h1>
+<form method="post" action="CustomerDetails" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name" required="required">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Customer Number</label>
+        <input type="number" class="form-control" asp-for="CustomerNumber" required="required">
+        <span asp-validation-for="CustomerNumber" class="text-danger"></span>
+    </div>
+     <div class="mb-3">
+        <label for="" class="form-label">Created</label>
+        <input type="date" class="form-control" asp-for="Created" readonly>
+    </div>
+
+    <button type="submit" class="btn-primary" asp-action="UpdateCustomerDetails" asp-controller="Customers">Update</button>
+    <button type="submit" class="btn-danger" asp-action="Delete" asp-controller="Customers">Delete</button>
+    <br />
+    <br />
+    <br />
+    <h1>Addresses</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>City</th>
+                <th>Street</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var address in Model.Addresses)
+            {
+                <tr>
+                    <td>@address.Id</td>
+                    <td>@address.City</td>
+                    <td>@address.Street</td>
+                    <td>@address.Created.ToString("yyyyy-MM-dd")</td>
+                    <td><a href="/Addresses/AddressDetails/@address.Id">Address Details</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Addresses/AddAddress/@Model.Id">Add Address</a>
+    <br />
+    <br />
+    <br />
+    <h1>Contacts</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Full Name</th>
+                <th>Office Number</th>
+                <th>Email</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in Model.Contacts)
+            {
+                <tr>
+                    <td>@contact.Id</td>
+                    <td>@contact.FullName</td>
+                    <td>@contact.OfficeNumber</td>
+                    <td>@contact.Email</td>
+                    <td>@contact.Created.ToString("yyyyy-MM-dd")</td>
+                    <td><a href="/Contacts/ContactDetails/@contact.Id">Contact Details</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+   <a href="/Contacts/AddContact/@Model.Id">Add Contact</a>
+
+</form>

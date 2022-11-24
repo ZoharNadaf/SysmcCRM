@@ -1,0 +1,66 @@
+﻿@model SysmcCRM.Models.ViewModel.AddCustomerViewModel
+@{
+}
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("#name").keyup(function() {
+                var formData = new FormData();
+                formData.append("name", $("#name").val());
+                formData.append("customerNumber", $("#customerNumber").val());
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("CheckIfCustomerExist", "Customers")',
+                    contentType: false,
+                    processData: false,
+                    cache: false,
+                    data: formData,
+                    success: successCallback,
+                    error: errorCallback
+                });
+            });
+            
+            $("#customerNumber").keyup(function() {
+                
+                 var cn = $("#customerNumber").val();
+                 if(cn.toString().length != 9)
+                    $("#messageCustomerNumber").text("Customer Number should be 9 digits long");
+                else
+                 $("#messageCustomerNumber").text("");
+
+                
+            });
+            function errorCallback() {
+                $("#messageName").text("Something went wrong whith name validation.");
+            }
+            function successCallback(response) {
+                if (response.responseCode == 0) {
+                    $("#messageName").text(response.responseMessage);
+                    //resetForm();
+                }
+                else {
+                    $("#messageName").text(response.responseMessage);
+                }
+            };
+        });
+    </script>
+}
+
+
+
+<h1>Add Customer</h1>
+<form method="post" action="AddCustomer" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Name</label>
+        <input type="text" id="name" class="form-control" asp-for="Name" required="required">
+        <span asp-validation-for="Name" id="messageName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Customer Number</label>
+        <input type="number" id="customerNumber" class="form-control" asp-for="CustomerNumber" required="required">
+        <span asp-validation-for="CustomerNumber" id="messageCustomerNumber" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn-primary" asp-action="AddCustomer" asp-controller="Customers">Add</button>
+</form>

@@ -1,0 +1,17 @@
+﻿@model SysmcCRM.Models.ViewModel.AddAddressViewModel
+@{
+}
+
+<h1>Add Address</h1>
+<form method="post" action="AddAddress" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">City</label>
+        <input type="text" class="form-control" asp-for="City" required="required">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Street</label>
+        <input type="text" class="form-control" asp-for="Street" required="required">
+    </div>
+
+    <button type="submit" class="btn-primary" asp-action="AddAddress" asp-controller="Addresses">Add</button>
+</form>

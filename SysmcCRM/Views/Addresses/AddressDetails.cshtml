@@ -1,0 +1,22 @@
+﻿@model SysmcCRM.Models.ViewModel.UpdateAddressViewModel
+@{
+}
+<h1>Address Details</h1>
+<form method="post" action="AddressDetails" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">City</label>
+        <input type="text" class="form-control" asp-for="City" required="required">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Street</label>
+        <input type="text" class="form-control" asp-for="Street" required="required">
+    </div>
+
+    <button type="submit" class="btn-primary" asp-action="AddressDetails" asp-controller="Addresses">Update</button>
+    <button type="submit" class="btn-danger" asp-action="Delete" asp-controller="Addresses">Delete</button>
+
+</form>

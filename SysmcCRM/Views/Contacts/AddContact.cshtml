@@ -1,0 +1,21 @@
+﻿@model SysmcCRM.Models.ViewModel.AddContactViewModel
+@{
+}
+
+<h1>Add Contact</h1>
+<form method="post" action="AddContact" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Full Name</label>
+        <input type="text" class="form-control" asp-for="FullName" required="required">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Office Number</label>
+        <input type="text" class="form-control" asp-for="OfficeNumber">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Email</label>
+        <input type="text" class="form-control" asp-for="Email">
+    </div>
+
+    <button type="submit" class="btn-primary" asp-action="AddContact" asp-controller="Contacts">Add</button>
+</form>

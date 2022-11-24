@@ -1,0 +1,46 @@
+﻿@model List<SysmcCRM.Models.Domain.Customer>
+@{
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        window.onload=function(){
+            var rows = document.getElementsByTagName("tr");
+                for (var i = 0; i < rows.length; i++)
+                {
+                    rows[i].onclick = function() {
+                       var id = $(this).children().first().text();
+                       var link = "Customers/CustomerDetails/"+id;
+                       window.location.href = link;
+                    };
+                }
+            }
+    </script>
+}
+
+
+<h1>Customers</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Customer Number</th>
+            <th>Created</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Id</td>
+                <td>@customer.Name</td>
+                <td>@customer.CustomerNumber</td>
+                <td>@customer.Created.ToString("yyyyy-MM-dd")</td>
+                <td><a href="Customers/CustomerDetails/@customer.Id">Customer Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
